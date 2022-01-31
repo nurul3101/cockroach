@@ -1791,7 +1791,7 @@ func handleTruncatedStateBelowRaft(
 	// perform well here because the tombstones could be "collapsed",
 	// but it is hardly worth the risk at this point.
 	prefixBuf := &loader.RangeIDPrefixBuf
-	if newTruncatedState.Index-oldTruncatedState.Index >= 10000 {
+	if newTruncatedState.Index-oldTruncatedState.Index >= 2 {
 		unsafeKey := prefixBuf.RaftLogKey(oldTruncatedState.Index + 1)
 		start := make(roachpb.Key, len(unsafeKey))
 		copy(start, unsafeKey)
